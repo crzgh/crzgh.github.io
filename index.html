@@ -30,16 +30,13 @@
     .container { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
     header.site-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-      background: rgba(245,238,238,.96);
+      background: rgba(245,238,238,.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
       transition: box-shadow .25s;
     }
     header.site-nav.scrolled { box-shadow: 0 6px 24px rgba(80,20,20,.08); }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 52px;
-      max-width: var(--max-w); margin: 0 auto; padding: 0 28px;
-    }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
     .brand img { height: 28px; width: auto; display: block; }
     .brand-name { font-weight: 700; font-size: 15px; letter-spacing: .3px; }

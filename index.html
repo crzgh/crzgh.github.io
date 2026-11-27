@@ -76,17 +76,38 @@
     .nav-links a { display: block; padding: 10px 0; }
     .nav-links .lang-switch { display: inline-block; margin-top: 8px; padding: 5px 14px; }
   }
-  .falling-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
-  .falling-item { position: absolute; top: -100px; display: flex; flex-direction: column; align-items: center; animation: fall linear forwards; }
-  .falling-item .cake { font-size: 30px; }
-  .falling-item .text { color: red; font-size: 14px; font-weight: bold; white-space: nowrap; }
+  #fallingContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .falling-cake {
+    position: absolute;
+    top: -50px;
+    font-size: 24px;
+    animation: fall linear infinite;
+  }
+  .falling-text {
+    position: absolute;
+    top: -30px;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    animation: fall linear infinite;
+  }
   @keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    from { transform: translateY(0); }
+    to { transform: translateY(110vh); }
   }
   </style>
 </head>
 <body>
+  <div id="fallingContainer"></div>
   <header class="site-nav" id="siteNav">
     <div class="nav-inner">
       <a class="brand" href="/">
@@ -114,6 +135,27 @@
   </div>
 
   <script>
+    var container = document.getElementById('fallingContainer');
+    var cakeCount = 30;
+    var textCount = 30;
+    for (var i = 0; i < cakeCount; i++) {
+      var cake = document.createElement('div');
+      cake.className = 'falling-cake';
+      cake.textContent = '🎂';
+      cake.style.left = Math.random() * 100 + 'vw';
+      cake.style.animationDuration = Math.random() * 3 + 3 + 's';
+      cake.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(cake);
+    }
+    for (var i = 0; i < textCount; i++) {
+      var text = document.createElement('div');
+      text.className = 'falling-text';
+      text.textContent = '生日快乐';
+      text.style.left = Math.random() * 100 + 'vw';
+      text.style.animationDuration = Math.random() * 3 + 4 + 's';
+      text.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(text);
+    }
     const nav = document.getElementById('siteNav');
     const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 10);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -138,34 +180,6 @@
         menuButton.focus();
       }
     });
-  </script>
-  <div class="falling-container" id="fallingContainer"></div>
-  <script>
-    const container = document.getElementById('fallingContainer');
-    function createFallingItem() {
-      const item = document.createElement('div');
-      item.className = 'falling-item';
-      const cake = document.createElement('div');
-      cake.className = 'cake';
-      cake.innerHTML = '🎂';
-      const text = document.createElement('div');
-      text.className = 'text';
-      text.innerHTML = '生日快乐';
-      item.appendChild(cake);
-      item.appendChild(text);
-      item.style.left = Math.random() * 100 + 'vw';
-      const duration = Math.random() * 3 + 2;
-      item.style.animationDuration = duration + 's';
-      item.style.animationDelay = Math.random() * 2 + 's';
-      container.appendChild(item);
-      setTimeout(() => {
-        item.remove();
-      }, (duration + 2) * 1000);
-    }
-    setInterval(createFallingItem, 300);
-    for (let i = 0; i < 20; i++) {
-      createFallingItem();
-    }
   </script>
 </body>
 </html>

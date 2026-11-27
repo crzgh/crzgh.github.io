@@ -88,8 +88,8 @@
   }
   .falling-cake {
     position: absolute;
-    top: -40px;
-    font-size: 16px;
+    top: -50px;
+    font-size: 18px;
     animation: fall linear infinite;
   }
   .falling-text {
@@ -136,28 +136,25 @@
 
   <script>
     var container = document.getElementById('fallingContainer');
-    var cakeCount = 80;
-    var textCount = 40;
+    var cakeEmojis = ['🎂', '🍰', '🎆', '🎇'];
+    var cakeCount = 30;
+    var textCount = 30;
     for (var i = 0; i < cakeCount; i++) {
       var cake = document.createElement('div');
       cake.className = 'falling-cake';
-      cake.textContent = '🎂';
-      var margin = window.innerWidth * 0.03;
-      var maxLeft = window.innerWidth - margin - 20;
-      cake.style.left = (margin + Math.random() * (maxLeft - margin)) + 'px';
-      cake.style.animationDuration = Math.random() * 4 + 4 + 's';
-      cake.style.animationDelay = Math.random() * 6 + 's';
+      cake.textContent = cakeEmojis[Math.floor(Math.random() * cakeEmojis.length)];
+      cake.style.left = Math.random() * 100 + 'vw';
+      cake.style.animationDuration = Math.random() * 3 + 3 + 's';
+      cake.style.animationDelay = Math.random() * 5 + 's';
       container.appendChild(cake);
     }
     for (var i = 0; i < textCount; i++) {
       var text = document.createElement('div');
       text.className = 'falling-text';
       text.textContent = '生日快乐';
-      var margin = window.innerWidth * 0.03;
-      var maxLeft = window.innerWidth - margin - 60;
-      text.style.left = (margin + Math.random() * (maxLeft - margin)) + 'px';
-      text.style.animationDuration = Math.random() * 4 + 5 + 's';
-      text.style.animationDelay = Math.random() * 6 + 's';
+      text.style.left = Math.random() * 100 + 'vw';
+      text.style.animationDuration = Math.random() * 3 + 4 + 's';
+      text.style.animationDelay = Math.random() * 5 + 's';
       container.appendChild(text);
     }
     const nav = document.getElementById('siteNav');
